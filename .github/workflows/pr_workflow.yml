@@ -1,0 +1,41 @@
+name: Pull Requests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request: {}
+
+jobs:
+  # Runs the linter
+  golangci:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '1.17'
+      - run: go version
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          # Required: the version of golangci-lint is required and must be specified without patch version: we always use the latest patch version.
+          version: v1.42
+
+  unit-tests:
+    name: unit-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '1.17'
+      - name: Unit Tests
+        run: |
+          make test-ci
+
+      - name: Annotate tests
+        if: always()
+        uses: guyarb/golang-test-annoations@v0.3.0
+        with:
+          test-results: unit-test.json
