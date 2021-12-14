@@ -130,8 +130,7 @@ func (g *Graph) UpdateNode(nodeID string, body []byte) (Node, error) {
 	return node, nil
 }
 
-
-func (g *Graph) DeleteNode(nodeID string) (error) {
+func (g *Graph) DeleteNode(nodeID string) error {
 	g.Lock()
 	defer g.Unlock()
 	node, ok := g.nodes[nodeID]
