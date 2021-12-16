@@ -9,7 +9,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/curious-kitten/assets"
+	"curiouskitten.io/assets"
 )
 
 const (

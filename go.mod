@@ -1,4 +1,4 @@
-module github.com/curious-kitten/assets
+module curiouskitten.io/assets
 
 go 1.17
 
